@@ -2,11 +2,10 @@
   "name": "cmail",
   "version": "1.0.0",
   "description": "Step by Step",
-# ここにコマンドラインツール作成に必要なプロパティを追加してください
-# コマンドとして実行されるファイル名は "main.js" にしましょう
-# ヒント: 必要なプロパティは次の2つ
-#   * グローバルにインストールする事を推奨するオプション
-#   * コマンドとして実行するファイルの指定
+  "preferGlobal": true,
+  "bin": {
+    "cmail": "main.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
