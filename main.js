@@ -7,7 +7,7 @@ console.log(process.argv);
 
 console.log(process.env.HOME);
 
-if (/* 引数が init だったら*/) {
-  var config = /* 'scripts-to-ignore/config.json' を読み込み*/;
+if (process.argv[2] === 'init') {
+  var config = require('./scripts-to-ignore/config.json');
   console.log(config);
 }
