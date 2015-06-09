@@ -51,3 +51,22 @@ if (process.argv[2] === 'init') {
     fs.writeFileSync('./scripts-to-ignore/token.json', JSON.stringify(body));
   });
 }
+
+if (process.argv[2] === 'labels') {
+  var tokens = require('./scripts-to-ignore/token.json');
+  var endpoint = ''; /* Label の一覧を取得するためにアクセスすべき URI */
+  var queries = {
+    access_token: tokens.access_token,
+    prettyPrint: true
+  };
+  var options = { /* request モジュールでアクセスする為に必要なプロパティ */ };
+  request./* get? post? Label の一覧取得に必要なメソッド */(options, function (error, response, body) {
+    if (response.statusCode !== 200) {
+      console.log("Error: ", error);
+      console.log("HTTP Status Code: ", response.statusCode);
+      console.log("Body: ", body);
+      return false;
+    }
+    console.log(body);
+  });
+}
