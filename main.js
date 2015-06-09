@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+var querystring = require('querystring');
+
 console.log('Hello Cmail!');
 
 console.log(process.argv);
@@ -10,26 +12,15 @@ console.log(process.env.HOME);
 if (process.argv[2] === 'init') {
   var config = require('./scripts-to-ignore/config.json');
   config = config.installed;
-  /**
-   * JavaScript はオブジェクトを生成する時に
-   * `{ key: value }` の形式で書ける．
-   * "Object リテラル" 等で調べてみる理解が進むかも？
-   */
   var params = {
     client_id: config.client_id,
     redirect_uri: config.redirect_uris[0],
-    /**
-     * この他に必要なパラメータを調べてください
-     * 必須項目は 4 つあります．
-     * ヒント: Gmail API の OAuth に関して調べてみよう
-     * 今回のアプリは "Installed Application"
-     */
+    response_type: 'code',
+    access_type: 'offline',
+    approval_prompt: 'force',
+    scope: 'https://www.googleapis.com/auth/gmail.readonly',
+    state: 'some random string for security'
   };
-  /**
-   * params で定義したオブジェクトを Query 化してください．
-   * `key=value` の形式にして複数のパラメータがある場合は `&` で繋げる
-   * 自力で実装してもいいし，ライブラリを使うのも OK
-   */
-  var uri = config.auth_uri +'?'+ '`key1=value1&key2=value2`';
+  var uri = config.auth_uri +'?'+ querystring.encode(params);
   console.log(uri);
 }
