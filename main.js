@@ -110,7 +110,18 @@ if (process.argv[2] === 'unread') {
       return false;
     }
     body.messages.forEach(function (item) {
-      console.log("message =>", item.id, "/", "thread =>", item.threadId);
+      var endpoint = ''; /* メッセージを取得するための URI */
+      var queries = { /* リクエストを送る際のパラメータ */ };
+      var options = { /* リクエストモジュールのオプション */ };
+      request.get(options, functions (error, response, body) {
+        if (response.statusCode !== 200) {
+          console.log("Error: ", error);
+          console.log("HTTP Status Code: ", response.statusCode);
+          console.log("Body: ", body);
+          return false;
+        }
+        /* 内容の出力 */
+      });
     });
   });
 }
