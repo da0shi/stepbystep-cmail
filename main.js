@@ -71,16 +71,19 @@ if (process.argv[2] === 'labels') {
       console.log("Body: ", body);
       return false;
     }
-    var syslabels = body.labels; /* システムラベルだけの配列を生成 */
-    var usrlabels = body.labels; /* ユーザーラベルだけの配列を生成 */
-
-    /**
-     * 各要素の id と name プロパティの内容を表示，列挙
-     * forEach を使うとシンプルに書けるかも?
-     */
+    var syslabels = body.labels.filter(function (item) {
+      return item.type === 'system';
+    });
+    var usrlabels = body.labels.filter(function (item) {
+      return item.type === 'user';
+    });
     console.log("<System Labels>");
-    // システムラベルの列挙
+    syslabels.forEach(function (item) {
+      console.log(item.id, ':', item.name);
+    });
     console.log("<User Labels>");
-    // ユーザーラベルの列挙
+    usrlabels.forEach(function (item) {
+      console.log(item.id, ':', item.name);
+    });
   });
 }
