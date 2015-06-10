@@ -87,3 +87,20 @@ if (process.argv[2] === 'labels') {
     });
   });
 }
+
+if (process.argv[2] === 'unread') {
+  var tokens = require('./scripts-to-ignore/token.json');
+  var endpoint = 'https://www.googleapis.com/gmail/v1/users/me/messages';
+  var queries = {
+    /**
+     * リクエストを送る際のパラメータ
+     * Label の ID で未読を指定
+     */
+  };
+  var options = { /* request モジュールを使う際のオプション */ };
+  request.get(options, function (error, response, body) {
+    /**
+     * メッセージ一覧の列挙
+     */
+  });
+}
