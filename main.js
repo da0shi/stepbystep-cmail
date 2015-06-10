@@ -71,6 +71,16 @@ if (process.argv[2] === 'labels') {
       console.log("Body: ", body);
       return false;
     }
-    console.log(body);
+    var syslabels = body.labels; /* システムラベルだけの配列を生成 */
+    var usrlabels = body.labels; /* ユーザーラベルだけの配列を生成 */
+
+    /**
+     * 各要素の id と name プロパティの内容を表示，列挙
+     * forEach を使うとシンプルに書けるかも?
+     */
+    console.log("<System Labels>");
+    // システムラベルの列挙
+    console.log("<User Labels>");
+    // ユーザーラベルの列挙
   });
 }
