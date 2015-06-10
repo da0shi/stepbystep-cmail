@@ -110,17 +110,24 @@ if (process.argv[2] === 'unread') {
       return false;
     }
     body.messages.forEach(function (item) {
-      var endpoint = ''; /* メッセージを取得するための URI */
-      var queries = { /* リクエストを送る際のパラメータ */ };
-      var options = { /* リクエストモジュールのオプション */ };
-      request.get(options, functions (error, response, body) {
+      var endpoint = 'https://www.googleapis.com/gmail/v1/users/me/messages/'+ item.id;
+      var queries = {
+        access_token: tokens.access_token,
+        prettyPrint: true
+      };
+      var options = {
+        uri: endpoint,
+        qs: queries,
+        json: true
+      };
+      request.get(options, function (error, response, body) {
         if (response.statusCode !== 200) {
           console.log("Error: ", error);
           console.log("HTTP Status Code: ", response.statusCode);
           console.log("Body: ", body);
           return false;
         }
-        /* 内容の出力 */
+        console.log('snippet: ', body.snippet);
       });
     });
   });
